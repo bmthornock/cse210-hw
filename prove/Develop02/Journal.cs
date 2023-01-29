@@ -2,54 +2,59 @@ using System;
 using System.IO;
 
 
-public class Journal {
+public class Journal
+{
 
-    
-    public List<entry> _JournalEntry = new List<entry>();
 
-    internal static void LoadfromFile()
+    public List<Entry> _entries = new List<Entry>();
+
+    public void AddEntry()
     {
-        throw new NotImplementedException();
+
+        Entry myEntry = new Entry();
+
+        myEntry.Create();
+
+        _entries.Add(myEntry);
     }
 
-    public List<entry> AddEntry() {
-
-        entry _entry = new entry.Write();
-
-        _JournalEntry.Add(_entry);
-
-        return _JournalEntry;
-    }
-
-    public void Display() {
-        foreach (entry _entry in _JournalEntry){
-            Console.WriteLine($"{_entry}");
-    }
-
-    void LoadfromFile() {
-
-    string filename = "myJournal.txt";
-    string[] lines = System.IO.File.ReadAllLines(filename);
-
-    foreach (string line in lines)
+    public void Display()
     {
-    string[] parts = line.Split("|");
-
-    string _date = parts[0];
-    string _entry = parts[1];
-    }
+        foreach (Entry _entry in _entries)
+            _entry.Display();
     }
 
-    void SavefromFile() {
-
-    string fileName = "myJournal.txt";
-
-    using (StreamWriter outputFile = new StreamWriter(fileName))
+    public void LoadfromFile()
     {
-    foreach (entry _entry  in _JournalEntry){
-    outputFile.WriteLine($"{_entry}|");
+        _entries.Clear();
+        string filename = "myJournal.txt";
+        string[] lines = System.IO.File.ReadAllLines(filename);
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split("|");
+
+            string _date = parts[0];
+            string _entry = parts[1];
+
+            Entry myEntry = new Entry(_date, _entry);
+            _entries.Add(myEntry);
+
+        }
     }
+
+    public void SaveToFile()
+    {
+
+        string fileName = "myJournal.txt";
+
+        using (StreamWriter outputFile = new StreamWriter(fileName))
+        {
+            foreach (Entry myEntry in _entries)
+            {
+                outputFile.WriteLine($"{myEntry.SavetoString()}");
+            }
+        }
     }
 }
-}
-}
+

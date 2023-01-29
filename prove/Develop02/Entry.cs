@@ -1,24 +1,42 @@
 using System;
 
-public class entry{
+public class Entry
+{
 
     public string _response;
 
     public string _date;
 
-    public List<string> _newEntry = new List<string>();
+    public Entry(string date, string response) {
 
+        _date = date;
+        _response = response;
 
-    public List<string> Write(){
+    }
 
-    _date = DateTime.Now.ToShortDateString();
+    public Entry(){
 
-    _response = Console.ReadLine();
+    }
 
-    _newEntry.Add(_date);
-    _newEntry.Add(_response);
+    public void Create()
+    {
 
-    return _newEntry;
+        _date = DateTime.Now.ToShortDateString();
+
+        _response = Console.ReadLine();
+
+    }
+
+    public void Display() {
+
+        Console.WriteLine($"{_date}");
+        Console.WriteLine($"{_response}");
+    }
+
+    public string SavetoString(){
+
+        return _date + "|" + _response;
+
     }
 
 }

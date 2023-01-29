@@ -8,10 +8,14 @@ class Program
     {
         Console.WriteLine("Hello Develop02 World!");
 
-        string response = "";
-        Console.WriteLine("Welcome to Journal Master 5000!");
-        while(response != "5");
+        Journal myJournal = new Journal();
 
+        PromptGenerator myPromptGenerator = new PromptGenerator();
+
+        string response = "0";
+        Console.WriteLine("Welcome to Journal Master 6000!");
+        while(response != "5")
+        {
             Console.WriteLine("Please select an option from the following Menu: ");
             Console.WriteLine("1. Write");
             Console.WriteLine("2. Display");
@@ -22,23 +26,22 @@ class Program
             response = Console.ReadLine();
 
             if (response == "1"){
-                Journal _JournalEntry = new Journal();
 
-                new promptGenerator.Display();
+                myPromptGenerator.Display();
 
-                new Journal.AddEntry();
+                myJournal.AddEntry();
             }
             else if(response == "2"){
 
-                new Journal.Display();
+                myJournal.Display();
             }
             else if(response == "3"){
 
-                Journal.LoadfromFile();
+                myJournal.LoadfromFile();
             }
             else if(response == "4"){
 
-                Journal.SavefromFile();
+                myJournal.SaveToFile();
             }
             else if(response == "5"){
 
@@ -47,5 +50,6 @@ class Program
             else{
                 Console.WriteLine("Please enter a valid input");
             }
+        }
     }
 }
