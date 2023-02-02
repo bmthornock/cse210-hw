@@ -20,4 +20,4 @@ class Program
         f4.GetFractionString();
         Console.WriteLine(f4.GetDecimalValue());
     }
-}
+} 
